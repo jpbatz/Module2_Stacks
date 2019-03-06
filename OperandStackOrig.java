@@ -9,11 +9,12 @@ package Module2_Stacks;
  */
 public class OperandStackOrig {
 
-	private char [] operandStack;
+	private String [] operandStack;
 	private int tos;
+	private int maxSize = 50;
 
 	public OperandStackOrig() {
-		this.operandStack = new char[50];
+		this.operandStack = new String[maxSize];
 		tos = -1;
 	}
 
@@ -21,25 +22,29 @@ public class OperandStackOrig {
 		return (this.tos <= -1);
 	}
 	
-	public void push(char item) {
-		System.out.println("push(" + item + ")");
+	public boolean isFull() {
+		return (this.tos == this.size() - 1);
+	}
+	
+	public void push(String item) {
+//		System.out.println("push(" + item + ")");
 		if (this.tos < this.operandStack.length - 1) {
 			this.operandStack[++this.tos] = item;
 		} else {
-			System.out.println("Stack Full");
+//			System.out.println("Stack Full");
 		}
 	}
 		
-	public char pop() {
+	public String pop() {
 		if (this.tos > -1) {
-			char item = this.operandStack[this.tos];
-			System.out.println("pop => " + item);
-			this.operandStack[this.tos] = (char) 0;
+			String item = this.operandStack[this.tos];
+//			System.out.println("pop => " + item);
+			this.operandStack[this.tos] = null;
 			this.tos--;
 			return item;
 		} else {
-			System.out.println("Stack is Empty");
-			return (char) 0;
+//			System.out.println("Stack is Empty");
+			return null;
 		}
 	}	
 	
@@ -50,7 +55,7 @@ public class OperandStackOrig {
 	
 	public int size() {
 		int stackSize = this.tos+1;
-		System.out.println("Size = " + stackSize);
+//		System.out.println("Size = " + stackSize);
 		return stackSize;
 	}
 	
@@ -63,7 +68,7 @@ public class OperandStackOrig {
 	
 	public void fillOperandStack() {
 			for (int i=0; i<50; i++) {
-				this.operandStack[i] = (char) 0;
+				this.operandStack[i] = null;
 		}
 	}
 	
@@ -71,81 +76,81 @@ public class OperandStackOrig {
 	 * @param args
 	 */
 //	public static void main(String[] args) {
-//		
-//		OperandStack testOperandStack = new OperandStack();
-//		
-//		
-//		System.out.println("Empty: " + testOperandStack.isEmpty());
-//		
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		System.out.println(testOperandStack.pop());
-//		testOperandStack.push('A');
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.push('B');
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.push('C');
-//		testOperandStack.push('D');
-//		testOperandStack.push('E');
-//		testOperandStack.push('F');
-//		testOperandStack.push('G');
-//		testOperandStack.push('H');
-//		testOperandStack.push('I');
-//		testOperandStack.push('J');
-//		testOperandStack.push('K');
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
+//	
+//	OperandStack testOperandStack = new OperandStack();
+//	
+//	
+//	System.out.println("Empty: " + testOperandStack.isEmpty());
+//	
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	System.out.println(testOperandStack.pop());
+//	testOperandStack.push("ten");
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.push("nine");
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.push("eight");
+//	testOperandStack.push("seven");
+//	testOperandStack.push("six");
+//	testOperandStack.push("five");
+//	testOperandStack.push("four");
+//	testOperandStack.push("three");
+//	testOperandStack.push("two");
+//	testOperandStack.push("one");
+//	testOperandStack.push("zero");
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
 //
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
 //
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
 //
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		testOperandStack.pop();
-//		testOperandStack.displayOperandStack();
-//		testOperandStack.size();
-//		
-//		System.out.println(testOperandStack.isEmpty());
-//	}
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	testOperandStack.pop();
+//	testOperandStack.displayOperandStack();
+//	testOperandStack.size();
+//	
+//	System.out.println(testOperandStack.isEmpty());
+//}
 
 }

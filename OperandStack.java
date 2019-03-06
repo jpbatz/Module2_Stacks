@@ -1,151 +1,129 @@
 /**
- * 
- */
-//package Module2_Stacks;
-
-/**
- * @author jph
- * Ref: Based on common implementation of stacks: Lecture Slides Module 2 - Stacks, test book, etc.
+ * class: OperandStack
+ * @author Joanne Hayashi (EN.605.202.84.SP19) 
+ * Ref: Project0.java, and based on common implementation of stacks: 
+ *      Lecture Slides Module 2 - Stacks, test book, etc.
  */
 public class OperandStack {
 
-	private String [] operandStack;
-	private int tos;
+    private String[] operandStack;
+    private int tos;
+    private int maxSize = 256;  // set > expected consecutive operands
+                                // to prevent stack overflow
 
-	public OperandStack() {
-		this.operandStack = new String[50];
-		tos = -1;
-	}
+    /**
+     * method: OperandStack() constructor
+     * @param none
+     * @return nothing
+     */
+    public OperandStack() {
+        this.operandStack = new String[maxSize];
+        tos = -1;
+    }
 
-	public boolean isEmpty() {
-		return (this.tos <= -1);
-	}
-	
-	public void push(String item) {
-		System.out.println("push(" + item + ")");
-		if (this.tos < this.operandStack.length - 1) {
-			this.operandStack[++this.tos] = item;
-		} else {
-			System.out.println("Stack Full");
-		}
-	}
-		
-	public String pop() {
-		if (this.tos > -1) {
-			String item = this.operandStack[this.tos];
-			System.out.println("pop => " + item);
-			this.operandStack[this.tos] = null;
-			this.tos--;
-			return item;
-		} else {
-			System.out.println("Stack is Empty");
-			return null;
-		}
-	}	
-	
-	public void reset() {
-		this.fillOperandStack();
-		this.tos = -1;
-	}
-	
-	public int size() {
-		int stackSize = this.tos+1;
-		System.out.println("Size = " + stackSize);
-		return stackSize;
-	}
-	
-	public void displayOperandStack() {
-		for (int i = 0; i<50; i++) {
-			System.out.print(this.operandStack[i] + " ");
-		}
-		System.out.println("\n-------------------\n");
-	}
-	
-	public void fillOperandStack() {
-			for (int i=0; i<50; i++) {
-				this.operandStack[i] = null;
-		}
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-	
-	OperandStack testOperandStack = new OperandStack();
-	
-	
-	System.out.println("Empty: " + testOperandStack.isEmpty());
-	
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	System.out.println(testOperandStack.pop());
-	testOperandStack.push("ten");
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.push("nine");
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.push("eight");
-	testOperandStack.push("seven");
-	testOperandStack.push("six");
-	testOperandStack.push("five");
-	testOperandStack.push("four");
-	testOperandStack.push("three");
-	testOperandStack.push("two");
-	testOperandStack.push("one");
-	testOperandStack.push("zero");
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
+    /**
+     * method: isEmpty() - checks if stack is empty
+     * @param none
+     * @return true if empty, false if item(s) exist(s)
+     */
+    public boolean isEmpty() {
+        if (this.tos <= -1) {
+//            System.out.println("*** Insufficient Data: Stack is EMPTY! ***");
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
+    /**
+     * method: isFull() - checks for stack full
+     * @param none
+     * @return true if full, false if not full
+     */
+    public boolean isFull() {
+        if (this.tos >= maxSize - 1) {
+//          System.out.println("** Insufficient Resources: Stack is FULL! **");
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
+    /**
+     * method: push() - adds item to top of stack
+     * @param item - element to add to top of stack
+     * @return nothing
+     */
+    public void push(String item) {
+        // System.out.println("push(" + item + ")");
+        if (!isFull()) {
+            this.operandStack[++this.tos] = item;
+        } else {
+//          System.out.println("** Insufficient Resources: Stack is FULL! **");
+            return;
+        }
+    }
 
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	testOperandStack.pop();
-	testOperandStack.displayOperandStack();
-	testOperandStack.size();
-	
-	System.out.println(testOperandStack.isEmpty());
-}
+    /**
+     * method: pop() - removes item from top of stack
+     * @param none
+     * @return item removed from the stack
+     */
+    public String pop() {
+        if (!isEmpty()) {
+            String item = this.operandStack[this.tos];
+            // System.out.println("pop => " + item);
+            this.operandStack[this.tos] = null;
+            this.tos--;
+            return item;
+        } else {
+//          System.out.println("** Insufficient Resources: Stack is EMPTY! **");
+            return null;
+        }
+    }
+
+    /**
+     * method: reset() - clears items from stack
+     * @param none
+     * @return nothing
+     */
+    public void reset() {
+        this.fillOperandStack();
+        this.tos = -1;
+    }
+
+    /**
+     * method: size() - determines stack size
+     * @param none
+     * @return number of items on stack
+     */
+    public int size() {
+        int stackSize = this.tos + 1;
+        // System.out.println("Size = " + stackSize);
+        return stackSize;
+    }
+
+    /**
+     * method: displayOperandStack() - displays items on stack
+     * @param none
+     * @return nothing
+     */
+    public void displayOperandStack() {
+        for (int i = 0; i < maxSize; i++) {
+            System.out.print(this.operandStack[i] + " ");
+        }
+        System.out.println("\n-------------------\n");
+    }
+
+    /**
+     * method: fillOperandStack() - clear items from stack
+     * @param none
+     * @return nothing
+     */
+    public void fillOperandStack() {
+        for (int i = 0; i < maxSize; i++) {
+            this.operandStack[i] = null;
+        }
+    }
 
 }

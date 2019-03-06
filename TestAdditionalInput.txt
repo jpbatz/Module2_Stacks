@@ -1,0 +1,13 @@
+A   B	+ C-  
+AB     C	+-
+	AB-C+ DEF-+a	$
+abcde-+$*ef*-
+ABC+*CBA-+*
+ AbC+/	CB A* +
+AB-*CBA+-*
+ABC-/BA-+/
+
+	BLANK LINE
+		$
+A BC+$	CBA-+*
+AB0+/CBA+-/
